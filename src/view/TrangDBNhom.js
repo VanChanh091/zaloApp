@@ -32,19 +32,19 @@ const DanhBaNhom = () => {
     <View style={styles.createGroupContainer}>
           <Text style={styles.createGroupText}>Tạo nhóm với:</Text>
           <View style={styles.iconsContainer}>
-            {/* Hình ảnh và dòng chữ lịch */}
+      
             <View style={styles.iconItem}>
               <Image source={require("../img/lich.png")} style={styles.iconImage} />
               <Text style={styles.iconText}>Lịch</Text>
             </View>
             
-            {/* Hình ảnh và dòng chữ nhắc hẹn */}
+        
             <View style={styles.iconItem}>
               <Image source={require("../img/nhachen.png")} style={styles.iconImage} />
               <Text style={styles.iconText}>Nhắc hẹn</Text>
             </View>
             
-            {/* Hình ảnh và dòng chữ nhóm offline */}
+           
             <View style={styles.iconItem}>
               <Image source={require("../img/off.png")} style={styles.iconImage} />
               <Text style={styles.iconText}>Nhóm offline</Text>
@@ -69,6 +69,7 @@ const DanhBaNhom = () => {
           )}
         />
       </Fragment>
+      
     </View>
   );
 };
