@@ -5,32 +5,91 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Switch,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SettingDetailsChat = () => {
+const SettingDetailsChat = ({navigation}) => {
+  const [isEnabledBF, setIsEnabledBf] = useState(false);
+  const [isEnabledGhim, setIsEnabledGhim] = useState(false);
+  const [isEnabledHide, setIsEnabledHide] = useState(false);
+  const [isEnabledNotify, setIsEnabledNotify] = useState(false);
+
+  const NotifyCall = () => {
+    setIsEnabledNotify((previousState) => !previousState);
+  };
+
+  const bestFriend = () => {
+    setIsEnabledBf((previousState) => !previousState);
+  };
+
+  const ghimChat = () => {
+    setIsEnabledGhim((previousState) => !previousState);
+    // Đoạn code này có thể được mở rộng để thực hiện các hành động cụ thể khi bật hoặc tắt
+  };
+
+  const HideChat = () => {
+    setIsEnabledHide((previousState) => !previousState);
+  };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flex: 3 }}>
+      {/* header */}
+      <View
+        style={{
+          flex: 0.7,
+          flexDirection: "row",
+          backgroundColor: "#0097FB",
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{ flex: 1.2, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../img/previous.png")}
+              style={{ width: 35, height: 35, resizeMode: "contain" }}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{ flex: 7.8, borderRightWidth: 1, justifyContent: "center" }}
+        >
+          <Text
+            style={{
+              fontWeight: 500,
+              fontSize: 17,
+              color: "white",
+              paddingLeft: 5,
+            }}
+          >
+            Tùy chọn
+          </Text>
+        </View>
+      </View>
+
+      {/* body */}
+      <View style={{ flex: 2.6, backgroundColor:"white",}}>
         <View
           style={{
             flex: 1.7,
             justifyContent: "center",
             alignItems: "center",
+            
           }}
         >
           <Image
-            source={require("../img/avtLanvy.png")}
+            source={require("../img/avtVC.png")}
             style={{
               width: 85,
               height: 85,
               resizeMode: "contain",
-              marginTop: 20,
+              marginTop: 10,
             }}
           ></Image>
           <Text style={{ fontSize: 18, marginTop: 7, fontWeight: "bold" }}>
-            Lan Vy
+            Văn Chánh
           </Text>
         </View>
         <View
@@ -143,81 +202,11 @@ const SettingDetailsChat = () => {
           </View>
         </View>
       </View>
-      <View style={{ flex: 7 }}>
+
+      {/* footer */}
+      <View style={{ flex: 6.7 }}>
         <View style={{ backgroundColor: "#F0F1F3", flex: 1 }}>
           <ScrollView>
-            <TouchableOpacity
-              style={{
-                width: "100%",
-                height: 85,
-                backgroundColor: "#fff",
-                marginTop: 12,
-                flexDirection: "row",
-              }}
-            >
-              <View
-                style={{
-                  flex: 1.5,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  source={require("../img/lock.png")}
-                  style={{ width: 35, height: 35, resizeMode: "contain" }}
-                ></Image>
-              </View>
-              <View style={{ flex: 8.5 }}>
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    paddingLeft: 12,
-                    flexDirection: "row",
-                  }}
-                >
-                  <View
-                    style={{
-                      flex: 3.8,
-                      justifyContent: "center",
-                      paddingTop: 10,
-                    }}
-                  >
-                    <Text style={{ fontWeight: "600", fontSize: 16 }}>
-                      Mã hóa đầu cuối
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flex: 6.2,
-                      justifyContent: "center",
-                      paddingTop: 10,
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: 50,
-                        height: "75%",
-                        borderRadius: 20,
-                        backgroundColor: "#34A25B",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Text style={{ fontSize: 16, color: "white" }}>BETA</Text>
-                    </View>
-                  </View>
-                </View>
-                <View
-                  style={{ flex: 1, justifyContent: "center", paddingLeft: 12 }}
-                >
-                  <Text style={{ fontSize: 13, marginTop: -15 }}>
-                    Chưa nâng cấp
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-
             <View
               style={{
                 width: "100%",
@@ -267,9 +256,8 @@ const SettingDetailsChat = () => {
                 </View>
                 <View
                   style={{
-                    flex: 6.5,
+                    flex: 7,
                     justifyContent: "center",
-                    borderRightWidth: 1,
                     borderBottomWidth: 1,
                     borderColor: "grey",
                   }}
@@ -279,8 +267,22 @@ const SettingDetailsChat = () => {
                   </Text>
                 </View>
                 <View
-                  style={{ flex: 2, borderBottomWidth: 1, borderColor: "grey" }}
-                ></View>
+                  style={{
+                    flex: 1.5,
+                    borderBottomWidth: 1,
+                    borderColor: "grey",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Switch
+                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    thumbColor={isEnabledBF ? "#f5dd4b" : "#f4f3f4"}
+                    onValueChange={bestFriend}
+                    value={isEnabledBF}
+                    ios_backgroundColor="#3e3e3e"
+                  />
+                </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ flex: 1, flexDirection: "row" }}>
                 <View
@@ -495,9 +497,8 @@ const SettingDetailsChat = () => {
                 </View>
                 <View
                   style={{
-                    flex: 6.5,
+                    flex: 7,
                     justifyContent: "center",
-                    borderRightWidth: 1,
                     borderBottomWidth: 1,
                     borderColor: "grey",
                   }}
@@ -507,8 +508,22 @@ const SettingDetailsChat = () => {
                   </Text>
                 </View>
                 <View
-                  style={{ flex: 2, borderBottomWidth: 1, borderColor: "grey" }}
-                ></View>
+                  style={{
+                    flex: 1.5,
+                    borderBottomWidth: 1,
+                    borderColor: "grey",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Switch
+                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    thumbColor={isEnabledGhim ? "#f5dd4b" : "#f4f3f4"}
+                    onValueChange={ghimChat}
+                    value={isEnabledGhim}
+                    ios_backgroundColor="#3e3e3e"
+                  />
+                </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ flex: 1, flexDirection: "row" }}>
                 <View
@@ -525,9 +540,8 @@ const SettingDetailsChat = () => {
                 </View>
                 <View
                   style={{
-                    flex: 6.5,
+                    flex: 7,
                     justifyContent: "center",
-                    borderRightWidth: 1,
                     borderBottomWidth: 1,
                     borderColor: "grey",
                   }}
@@ -537,8 +551,22 @@ const SettingDetailsChat = () => {
                   </Text>
                 </View>
                 <View
-                  style={{ flex: 2, borderBottomWidth: 1, borderColor: "grey" }}
-                ></View>
+                  style={{
+                    flex: 1.5,
+                    borderBottomWidth: 1,
+                    borderColor: "grey",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Switch
+                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    thumbColor={isEnabledHide ? "#f5dd4b" : "#f4f3f4"}
+                    onValueChange={HideChat}
+                    value={isEnabledHide}
+                    ios_backgroundColor="#3e3e3e"
+                  />
+                </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ flex: 1, flexDirection: "row" }}>
                 <View
@@ -555,9 +583,8 @@ const SettingDetailsChat = () => {
                 </View>
                 <View
                   style={{
-                    flex: 6.5,
+                    flex: 7,
                     justifyContent: "center",
-                    borderRightWidth: 1,
                     borderBottomWidth: 1,
                     borderColor: "grey",
                   }}
@@ -567,8 +594,22 @@ const SettingDetailsChat = () => {
                   </Text>
                 </View>
                 <View
-                  style={{ flex: 2, borderBottomWidth: 1, borderColor: "grey" }}
-                ></View>
+                  style={{
+                    flex: 1.5,
+                    borderBottomWidth: 1,
+                    borderColor: "grey",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Switch
+                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    thumbColor={isEnabledNotify ? "#f5dd4b" : "#f4f3f4"}
+                    onValueChange={NotifyCall}
+                    value={isEnabledNotify}
+                    ios_backgroundColor="#3e3e3e"
+                  />
+                </View>
               </TouchableOpacity>
               <TouchableOpacity style={{ flex: 1, flexDirection: "row" }}>
                 <View

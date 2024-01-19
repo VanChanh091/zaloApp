@@ -204,11 +204,10 @@ const User = () => {
             style={{
               flex: 6.5,
               justifyContent: "center",
-              borderBottomWidth: 1, 
               borderColor:'grey',
             }}
           >
-            <Text style={{ fontSize: 16, paddingLeft: 12 }}>
+            <Text style={{ fontSize: 20, paddingLeft: 12 }}>
               Tài khoản và bảo mật
             </Text>
           </View>
@@ -217,7 +216,6 @@ const User = () => {
               flex: 1.5,
               justifyContent: "center",
               alignItems: "center",
-              borderBottomWidth: 1, 
               borderColor:'grey',
             }}
           >
@@ -246,7 +244,7 @@ const User = () => {
               justifyContent: "center",
             }}
           >
-            <Text style={{ fontSize: 16, paddingLeft: 12 }}>
+            <Text style={{ fontSize: 20, paddingLeft: 12 }}>
               Quyền riêng tư
             </Text>
           </View>

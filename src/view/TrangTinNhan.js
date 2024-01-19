@@ -1,112 +1,142 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TextInput, Pressable, FlatList, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/Ionicons";
-import { Ionicons } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 
-const url = "http://655616db84b36e3a431eff1b.mockapi.io/products";
+// const url = "http://655616db84b36e3a431eff1b.mockapi.io/products";
 
-const TrangTinNhan = () => {
-  const navigation = useNavigation();
+const data = [
+{
+  image: source(require("../img/avtVC")),
+  name: "Văn Chánh",
+  Mesage: "abc"
+},
+{
+  image: source(require("../img/avtLanvy.png")),
+  name: "Lan Vy",
+  Mesage: "xyz"
+}
+]
+
+const TrangTinNhan = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const fetchData = () => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error("Error fetching data:", error));
-  };
+  // const fetchData = () => {
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json))
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.searchContainer}>
-        <Icon name="search" size={24} color="white" onPress={fetchData} />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Tìm Kiếm"
-          value={searchKeyword}
-          onChangeText={(text) => setSearchKeyword(text)}
-        />
-        <Pressable style={styles.addButton} onPress={() => navigation.navigate("Screen")}>
-          <Text style={styles.addButtonText}>+</Text>
-        </Pressable>
+      <View
+        style={{
+          flex: 0.7,
+          flexDirection: "row",
+          backgroundColor: "#0097FB",
+        }}
+      >
+        <View
+          style={{
+            flex: 8.5,
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              flex: 1.5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../img/searchWhite.png")}
+              style={{
+                width: 35,
+                height: 35,
+                resizeMode: "contain",
+                marginLeft: 5,
+              }}
+            ></Image>
+          </View>
+          <View style={{ flex: 8.5 }}>
+            <TextInput
+              style={{
+                height: "100%",
+                width: "100%",
+                borderRadius: 5,
+                paddingLeft: 10,
+                color: "white",
+                fontSize: 16,
+              }}
+              placeholder="Tìm kiếm"
+              placeholderTextColor="white"
+            />
+          </View>
+        </View>
+        <View
+          style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity>
+            <Text style={{ fontWeight: 400, fontSize: 30, color: "white" }}>
+              +
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.productItem}>
-             <View style={styles.productImageContainer}>
-        <Image source={{ uri: item.image }} style={styles.productImage} />
-      </View>
-            <View style={styles.productDetails}>
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.productTinnhan}>{item.tinnhan}</Text>
-            </View>
-          </View>
-        )}
-      />
-       <View style={styles.bottomBar}>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
-          <Ionicons name="chatbox" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Tin Nhắn</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
-          <Ionicons name="call" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Danh Bạ</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
-          <Ionicons name="compass" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Khám Phá</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("SettingDetailsChat")}>
-          <Ionicons name="journal" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Nhật Ký</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("User")}>
-  <Ionicons name="person" size={24} color="black" />
-  <Text style={styles.bottomBarItemText}>Cá Nhân</Text>
-</Pressable>
+      <View style={{ flex: 9.3 }}>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.productItem}
+              onPress={() => navigation.navigate("ViewChat")}
+            >
+              <View 
+              style={styles.productImageContainer}
+              >
+                <Image
+                  source={item.image}
+                  style={styles.productImage}
+                />
+              </View>
+              <View style={styles.productDetails}>
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.productTinnhan}>{item.tinnhan}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  searchContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: "#0097FB",
-  },
-  searchInput: {
-    flex: 1,
-    marginRight: 10,
-  },
-  addButton: {
-    padding: 10,
-    borderRadius: 10,
-  },
-  addButtonText: {
-    color: "white",
-  },
   productItem: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center", 
+    alignItems: "center",
     margin: 10,
     padding: 10,
-    borderBottomWidth: 1, 
-    borderBottomColor: "#ddd", 
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
   },
-  
+
   productName: {
     fontWeight: "bold",
     fontSize: 16,
