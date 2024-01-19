@@ -97,6 +97,7 @@ const TrangTinNhan = ({ navigation }) => {
         </View>
       </View>
 
+<<<<<<< HEAD
       <View style={{ flex: 9.3 }}>
         <FlatList
           data={data}
@@ -121,6 +122,44 @@ const TrangTinNhan = ({ navigation }) => {
             </TouchableOpacity>
           )}
         />
+=======
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.productItem}>
+             <View style={styles.productImageContainer}>
+        <Image source={{ uri: item.image }} style={styles.productImage} />
+      </View>
+            <View style={styles.productDetails}>
+              <Text style={styles.productName}>{item.name}</Text>
+              <Text style={styles.productTinnhan}>{item.tinnhan}</Text>
+            </View>
+          </View>
+        )}
+      />
+       <View style={styles.bottomBar}>
+        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
+          <Ionicons name="chatbox" size={24} color="black" />
+          <Text style={styles.bottomBarItemText}>Tin Nhắn</Text>
+        </Pressable>
+        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("TrangDanhBa")}>
+          <Ionicons name="call" size={24} color="black" />
+          <Text style={styles.bottomBarItemText}>Danh Bạ</Text>
+        </Pressable>
+        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
+          <Ionicons name="compass" size={24} color="black" />
+          <Text style={styles.bottomBarItemText}>Khám Phá</Text>
+        </Pressable>
+        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("SettingDetailsChat")}>
+          <Ionicons name="journal" size={24} color="black" />
+          <Text style={styles.bottomBarItemText}>Nhật Ký</Text>
+        </Pressable>
+        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("User")}>
+  <Ionicons name="person" size={24} color="black" />
+  <Text style={styles.bottomBarItemText}>Cá Nhân</Text>
+</Pressable>
+>>>>>>> 81d21624f47a91ffa467b50cf7305821ca974d6e
       </View>
     </View>
   );
