@@ -10,7 +10,9 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SettingDetailsChat = ({navigation}) => {
+const SettingDetailsChat = ({ navigation, route }) => {
+  const { data } = route.params;
+
   const [isEnabledBF, setIsEnabledBf] = useState(false);
   const [isEnabledGhim, setIsEnabledGhim] = useState(false);
   const [isEnabledHide, setIsEnabledHide] = useState(false);
@@ -70,17 +72,16 @@ const SettingDetailsChat = ({navigation}) => {
       </View>
 
       {/* body */}
-      <View style={{ flex: 2.6, backgroundColor:"white",}}>
+      <View style={{ flex: 2.6, backgroundColor: "white" }}>
         <View
           style={{
             flex: 1.7,
             justifyContent: "center",
             alignItems: "center",
-            
           }}
         >
           <Image
-            source={require("../img/avtVC.png")}
+            source={data.data.image}
             style={{
               width: 85,
               height: 85,
@@ -89,7 +90,7 @@ const SettingDetailsChat = ({navigation}) => {
             }}
           ></Image>
           <Text style={{ fontSize: 18, marginTop: 7, fontWeight: "bold" }}>
-            Văn Chánh
+            {data.data.name}
           </Text>
         </View>
         <View

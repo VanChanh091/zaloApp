@@ -12,20 +12,20 @@ import {
 // const url = "http://655616db84b36e3a431eff1b.mockapi.io/products";
 
 const data = [
-{
-  image: source(require("../img/avtVC")),
-  name: "Văn Chánh",
-  Mesage: "abc"
-},
-{
-  image: source(require("../img/avtLanvy.png")),
-  name: "Lan Vy",
-  Mesage: "xyz"
-}
-]
+  {
+    image: require("../img/avtVC.png"),
+    name: "Văn Chánh",
+    message: "abc",
+  },
+  {
+    image: require("../img/avtLanvy.png"),
+    name: "Lan Vy",
+    message: "xyz",
+  },
+];
 
 const TrangTinNhan = ({ navigation }) => {
-  const [data, setData] = useState([]);
+  const [filterData, setData] = useState(data);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   // const fetchData = () => {
@@ -90,125 +90,59 @@ const TrangTinNhan = ({ navigation }) => {
           style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}
         >
           <TouchableOpacity>
-            <Text style={{ fontWeight: 400, fontSize: 30, color: "white" }}>
+            <Text style={{ fontWeight: 400, fontSize: 40, color: "white" }}>
               +
             </Text>
           </TouchableOpacity>
         </View>
       </View>
 
-<<<<<<< HEAD
       <View style={{ flex: 9.3 }}>
         <FlatList
           data={data}
-          keyExtractor={(item) => item.id.toString()}
+          // keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={styles.productItem}
-              onPress={() => navigation.navigate("ViewChat")}
+              style={{
+                width: "100%",
+                height: 85,
+                flexDirection: "row",
+                backgroundColor: "white",
+              }}
+              onPress={() => navigation.navigate("ViewChat", {data: item})}
             >
-              <View 
-              style={styles.productImageContainer}
+              <View
+                style={{
+                  flex: 2,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
                 <Image
                   source={item.image}
-                  style={styles.productImage}
+                  style={{ resizeMode: "contain", width: 65, height: 65 }}
                 />
               </View>
-              <View style={styles.productDetails}>
-                <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.productTinnhan}>{item.tinnhan}</Text>
+
+              <View
+                style={{
+                  flex: 8,
+                  justifyContent: "center",
+                  borderBottomWidth: 1, 
+                  borderColor:"#ddd",
+                }}
+              >
+                <Text style={{fontWeight: 600, fontSize: 22, paddingLeft: 5, }}>{item.name}</Text>
+                <Text style={{fontWeight: 400, fontSize: 15, color:'grey', paddingLeft: 7,}}>{item.message}</Text>
               </View>
             </TouchableOpacity>
           )}
         />
-=======
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.productItem}>
-             <View style={styles.productImageContainer}>
-        <Image source={{ uri: item.image }} style={styles.productImage} />
-      </View>
-            <View style={styles.productDetails}>
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.productTinnhan}>{item.tinnhan}</Text>
-            </View>
-          </View>
-        )}
-      />
-       <View style={styles.bottomBar}>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
-          <Ionicons name="chatbox" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Tin Nhắn</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("TrangDanhBa")}>
-          <Ionicons name="call" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Danh Bạ</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("Screen")}>
-          <Ionicons name="compass" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Khám Phá</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("SettingDetailsChat")}>
-          <Ionicons name="journal" size={24} color="black" />
-          <Text style={styles.bottomBarItemText}>Nhật Ký</Text>
-        </Pressable>
-        <Pressable style={styles.bottomBarItem} onPress={() => navigation.navigate("User")}>
-  <Ionicons name="person" size={24} color="black" />
-  <Text style={styles.bottomBarItemText}>Cá Nhân</Text>
-</Pressable>
->>>>>>> 81d21624f47a91ffa467b50cf7305821ca974d6e
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  productItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: 10,
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-  },
-
-  productName: {
-    fontWeight: "bold",
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  productTinnhan: {
-    color: "#666",
-  },
-  productDetails: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  productImageContainer: {
-    borderRadius: 50,
-    overflow: "hidden",
-  },
-  productImage: {
-    width: 100,
-    height: 100,
-  },
-  bottomBar: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#E0E0E0",
-    height: 60,
-  },
-  bottomBarItem: {
-    alignItems: "center",
-  },
-  bottomBarItemText: {
-    marginTop: 5,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default TrangTinNhan;

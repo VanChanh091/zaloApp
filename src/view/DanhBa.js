@@ -145,7 +145,7 @@ const DanhBa = () => {
       <View style={{flex:0.2, backgroundColor:'#EAE6E6'}}></View>
 
       {/* footer */}
-      <View style={{ flex: 6.6, borderBottomWidth: 1 }}></View>
+      <View style={{ flex: 6.6, }}></View>
       <StatusBar />
     </SafeAreaView>
   );

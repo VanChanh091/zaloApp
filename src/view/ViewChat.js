@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import React from "react";
 
-const ViewChat = ({ navigation }) => {
+const ViewChat = ({ navigation, route }) => {
+  const { data } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       {/* header */}
@@ -41,7 +42,9 @@ const ViewChat = ({ navigation }) => {
             flex: 5,
             justifyContent: "center",
           }}
-          onPress={() => navigation.navigate("SettingDetailsChat")}
+          onPress={() =>
+            navigation.navigate("SettingDetailsChat", { data: { data } })
+          }
         >
           <Text
             style={{
@@ -51,7 +54,7 @@ const ViewChat = ({ navigation }) => {
               color: "white",
             }}
           >
-            Văn Chánh
+            {data.name}
           </Text>
         </TouchableOpacity>
         <View
@@ -94,7 +97,9 @@ const ViewChat = ({ navigation }) => {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <TouchableOpacity
-              onPress={() => navigation.navigate("SettingDetailsChat")}
+              onPress={() =>
+                navigation.navigate("SettingDetailsChat", { data: { data } })
+              }
             >
               <Image
                 source={require("../img/details.png")}
@@ -109,7 +114,7 @@ const ViewChat = ({ navigation }) => {
       <View style={{ flex: 8.5, backgroundColor: "#E2E8F1" }}></View>
 
       {/* footer */}
-      <View style={{ flex: 0.8, flexDirection: "row" }}>
+      <View style={{ flex: 0.8, flexDirection: "row", backgroundColor:"white", }}>
         <View
           style={{
             flex: 1.3,

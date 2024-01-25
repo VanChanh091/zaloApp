@@ -13,25 +13,30 @@ import DanhBa from './DanhBa'
 import ViewChat from './ViewChat'
 
 const MessageStack = createNativeStackNavigator();
-const SettingChat = createNativeStackNavigator();
 const PhoneBookStack = createNativeStackNavigator();
 const StoryStack = createNativeStackNavigator();
 const UserStack = createNativeStackNavigator();
 const loginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+  
 // function loginScreen(){
 //     <loginStack.Navigator>
 //         <loginStack.Screen  />
 //     </loginStack.Navigator>
 // }
 
-// function messageScreen(){
-//     <MessageStack.Navigator>
-//         <MessageStack.Screen name='Mess' component={TrangTinNhan} options={{headerShown:false}}/>
-//         <MessageStack.Screen name='Chat' component={ViewChat}/>
-//     </MessageStack.Navigator>
-// }
+ 
+
+const MessageScreen = () => {  
+  return (
+    <MessageStack.Navigator initialRouteName='MessagePage'>
+      <MessageStack.Screen name="MessagePage" component={TrangTinNhan} options={{headerShown:false, }}/>
+      <MessageStack.Screen name="ViewChat" component={ViewChat} options={{headerShown:false, }} />
+      <MessageStack.Screen name="SettingDetailsChat" component={SettingDetailsChat} options={{headerShown:false}} />
+    </MessageStack.Navigator> 
+  )
+}
 
 // function settingChatScreen(){
 //   <SettingChat.Navigator>
@@ -60,15 +65,16 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator  >
         <Tab.Screen
           name="Chat"
-          component={TrangTinNhan}
+          component={MessageScreen}
           options={{ tabBarLabel: "Tin nhắn",
           headerShown:false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="chatbubble-ellipses-outline" color={color} size={size}></Icon>
-          )
+          ),
+          // tabBarStyle: { display: 'none' }
         }}
         />
         <Tab.Screen name="PhoneBook" component={DanhBa} options={{
@@ -76,7 +82,7 @@ const TabNavigation = () => {
           headerShown:false,
           tabBarIcon:({color, size}) => (
             <Icon name="book-outline" color={color} size={size} />
-          )
+          ),
         }} />
         <Tab.Screen name="User" component={User} options={{
           tabBarLabel:"Cá nhân",
